@@ -1,11 +1,10 @@
-from .base_model import BaseModel
+from .basemodel import BaseModel
 from app.extensions import db
-from .places import Place
+from .place import Place
 from .user import User
 
 class Review(BaseModel):
 	__tablename__ = 'reviews'
-	__table_args__ = {'extend_existing': True} 
 
 	id = db.Column(db.Integer, nullable=False, primary_key=True)
 	text = db.Column(db.String(500), nullable=False)

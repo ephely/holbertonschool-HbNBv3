@@ -1,6 +1,6 @@
 from flask_restx import Namespace, Resource, fields
 from app.services import facade
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt, verify_jwt_in_request
 from flask import request
 
 
@@ -11,7 +11,8 @@ user_model = api.model('User', {
     'first_name': fields.String(required=True, description='First name of the user'),
     'last_name': fields.String(required=True, description='Last name of the user'),
     'email': fields.String(required=True, description='Email of the user'),
-    'password': fields.String(required=True, description='Password of the user')
+    'password': fields.String(required=True, description='Password of the user'),
+    'is_admin': fields.Boolean(required=False, description='Admin status (true for admin)')
 })
 
 @api.route('/')
@@ -23,6 +24,22 @@ class UserList(Resource):
     def post(self):
         """Register a new user"""
         user_data = api.payload
+        admin_exists = facade.admin_verification()
+
+        if not admin_exists:
+            user_data['is_admin']=True
+        else:
+            if user_data.get('is_admin', False):
+                try:
+                    verify_jwt_in_request()
+                    current_user_claims = get_jwt()
+                    if not current_user_claims.get('is_admin', False):
+                        return {'error': 'Admin privileges required'}, 403
+                except Exception as e:
+                    return {'error': 'Authentication required'}, 401
+            else:
+                user_data.pop('is_admin', None)
+
         
         existing_user = facade.get_user_by_email(user_data['email'])
         if existing_user:
@@ -84,7 +101,7 @@ class UserResource(Resource):
     @api.response(400, 'Invalid input data')
     @jwt_required()
     def put(self, user_id):
-        """Update user information (Only the user can modify, except email/password)"""
+        """Update user information"""
         current_user = get_jwt_identity()
 
         if user_id != current_user['id']:

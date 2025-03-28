@@ -1,4 +1,8 @@
 from app.persistence.repository import SQLAlchemyRepository
+from app.persistence.amenity_repository import AmenityRepository
+from app.persistence.place_repository import PlaceRepository
+from app.persistence.review_repository import ReviewRepository
+from app.persistence.user_repository import UserRepository
 from app.models.user import User
 from app.models.amenity import Amenity
 from app.models.place import Place
@@ -6,10 +10,10 @@ from app.models.review import Review
 
 class HBnBFacade:
     def __init__(self):
-        self.user_repo = SQLAlchemyRepository(User)
-        self.amenity_repo = SQLAlchemyRepository(Amenity)
-        self.place_repo = SQLAlchemyRepository(Place)
-        self.review_repo = SQLAlchemyRepository(Review)
+        self.user_repo = UserRepository()
+        self.amenity_repo = AmenityRepository()
+        self.place_repo = PlaceRepository()
+        self.review_repo = ReviewRepository()
 
     # USER
     def create_user(self, user_data):
@@ -78,6 +82,25 @@ class HBnBFacade:
     def update_place(self, place_id, place_data):
         self.place_repo.update(place_id, place_data)
 
+    def delete_place(self, place_id):
+        place = self.place_repo.get(place_id)
+        if not place:
+            raise ValueError("Place not found")
+        
+        owner = place.owner
+        if owner and place in owner.places:
+            owner.places.remove(place)
+
+        for amenity in place.amenity:
+            if place in amenity.places:
+                amenity.places.remove(place)
+        
+        for review in list(place.reviews):
+            self.delete_review(review.id)
+        
+        self.place_repo.delete(place_id)
+
+
     # REVIEWS
     def create_review(self, review_data):
         user = self.user_repo.get(review_data['user_id'])
@@ -122,3 +145,8 @@ class HBnBFacade:
         user.delete_review(review)
         place.delete_review(review)
         self.review_repo.delete(review_id)
+
+     # ADMIN
+    def admin_verification(self):
+        users = self.get_users()
+        return any(user.is_admin for user in users)

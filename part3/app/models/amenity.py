@@ -1,4 +1,4 @@
-from .base_model import BaseModel
+from .basemodel import BaseModel
 from app.extensions import db
 
 class Amenity(BaseModel):
