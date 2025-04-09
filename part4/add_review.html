@@ -11,15 +11,28 @@
         <!-- Add something to idfentify the place you're reviewing -->
         <form id="review-form">
             <h2>Add a Review</h2>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
             <label for="review">Your Review:</label>
             <textarea id="review" name="review" required></textarea>
             <label for="rating">Rating:</label>
             <select id="rating" name="rating" required>
-                <!-- Options for rating -->
+                <option value="">-- Give a rating --</option>
+                <option value="1">★ 1</option>
+                <option value="2">★★ 2</option>
+                <option value="3">★★★ 3</option>
+                <option value="4">★★★★ 4</option>
+                <option value="5">★★★★★ 5</option>
             </select>
+            <label for="password">Confirm password:</label>
+            <input type="password" id="password" name="password" required>
             <button type="submit">Submit Review</button>
         </form>
     </main>
+    <div id="footer"></div>
+    
     <script src="scripts.js"></script>
+    <script src="include.js"></script>
 </body>
 </html>
