@@ -1,25 +1,33 @@
 <head>
-    <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <header>
-    <nav>
-        <section class="logo">
-            <a href="index.html"><img src="images/logo.png" alt="Logo"></a>
-        </section>
-        <section class="search-bar">
-            <form id="search-bar" action="search_results.html" method="get">
-                <input type="text" id="search-input" name="query" placeholder="Search a place" required>
-                <button id="search-button" type="submit">Search</button>
-            </form>
-        </section>
-        <section class="home">
-            <a href="index.html">Home</a>
-        </section>
-        <section class="header-places">
-            <a href="place.html">Places</a>
-        </section>
-        <section class="login-button">
-            <a href="login.html" id="login-link">Login</a>
-        </section>
-    </nav>
+  <nav class="bar">
+    <section class="logo">
+      <a href="index.html"><img src="logos/logo.png" alt="Logo" /></a>
+    </section>
+    <section class="search-bar">
+      <form id="search-bar" action="search_results.html" method="get">
+        <input
+          type="text"
+          id="search-input"
+          name="query"
+          placeholder="Search a place"
+          required
+        />
+        <button id="search-button" type="submit">Search</button>
+      </form>
+    </section>
+    <ul class="bar-menu">
+      <section class="home">
+        <a href="index.html">Home</a>
+      </section>
+      <section class="header-places">
+        <a href="place.html">Places</a>
+      </section>
+      <section class="login-button">
+        <a href="login.html" id="login-link">Login</a>
+      </section>
+    </ul>
+  </nav>
 </header>

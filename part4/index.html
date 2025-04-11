@@ -1,33 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>List of Places</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="images/icon.png" type="image/png" />
+  </head>
+  <body>
     <header>
-        <nav>
-            <a href="login.html" id="login-link">Login</a>
-        </nav>
+      <nav>
+        <div id="header"></div>
+      </nav>
     </header>
     <main>
-        <!-- ------ HEADER ------ -->
-        <div id="header"></div>
-        <section id="filter">
-            <label for="price-filter">Max Price:</label>
-            <select id="price-filter">
-                <!-- Options will be populated dynamically -->
-            </select>
-        </section>
-        <section id="places-list">
-            <!-- List of places will be populated dynamically -->
-        </section>
+      <!-- ------ HEADER ------ -->
+      <section id="filter">
+        <label for="price-filter">Max Price:</label>
+        <select id="price-filter">
+          <!-- Options will be populated dynamically -->
+          <option value="all">All</option>
+          <option value="100">100$</option>
+          <option value="500">500$</option>
+          <option value="1000">1000$</option>
+        </select>
+      </section>
+      <section id="places-list" class="places-grid">
+        <div class="place-card" data-price="85">
+          <img
+            class="place-img"
+            src="images/apprt.png"
+            alt="Appartement"
+            style="width: 100%"
+          />
+          <div class="container">
+            <h3>Charming Apartment</h3>
+            <p>$85/night</p>
+            <button
+              class="details-button"
+              onclick="location.href='place.html?id=1'"
+            >
+              View Details
+            </button>
+          </div>
+        </div>
+        <div class="place-card" data-price="125">
+          <img
+            class="place-img"
+            src="images/cruise.png"
+            alt="Cruise"
+            style="width: 100%"
+          />
+          <div class="container">
+            <h3>Beach Hotel</h3>
+            <p>$125/night</p>
+            <button
+              class="details-button"
+              onclick="location.href='place.html?id=2'"
+            >
+              View Details
+            </button>
+          </div>
+        </div>
+        <div class="place-card" data-price="630">
+          <img
+            class="place-img"
+            src="images/mansion.png"
+            alt="Mansion"
+            style="width: 100%"
+          />
+          <div class="container">
+            <h3>Sweet Mansion</h3>
+            <p>$630/night</p>
+            <button
+              class="details-button"
+              onclick="location.href='place.html?id=3'"
+            >
+              View Details
+            </button>
+          </div>
+        </div>
+        <div class="place-card" data-price="200">
+          <img
+            class="place-img"
+            src="images/vacation.png"
+            alt="Vacation House"
+            style="width: 100%"
+          />
+          <div class="container">
+            <h3>Vacation House</h3>
+            <p>$200/night</p>
+            <button
+              class="details-button"
+              onclick="location.href='place.html?id=4'"
+            >
+              View Details
+            </button>
+          </div>
+        </div>
+        <div class="place-card" data-price="1999">
+          <img
+            class="place-img"
+            src="images/yacht.png"
+            alt="Yacht"
+            style="width: 100%"
+          />
+          <div class="container">
+            <h3>Luxury Yacht</h3>
+            <p>$1 999/night</p>
+            <button
+              class="details-button"
+              onclick="location.href='place.html?id=5'"
+            >
+              View Details
+            </button>
+          </div>
+        </div>
+        <div class="place-card" data-price="85">
+          <img
+            class="place-img"
+            src="images/tree.png"
+            alt="Tree House"
+            style="width: 100%"
+          />
+          <div class="container">
+            <h3>Tree House In The Woods</h3>
+            <p>$100/night</p>
+            <button
+              class="details-button"
+              onclick="location.href='place.html?id=6'"
+            >
+              View Details
+            </button>
+          </div>
+        </div>
+      </section>
     </main>
     <div id="footer"></div>
-    
+
     <script src="scripts.js"></script>
     <script src="include.js"></script>
-</body>
+  </body>
 </html>
