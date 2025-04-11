@@ -7,9 +7,11 @@ from app.api.v1.reviews import api as reviews_ns
 from app.api.v1.auth import api as auth_ns
 from app.extensions import bcrypt, jwt, db
 from app.database import init_db, seed_db
+from flask_cors import CORS
 
 def create_app(config_class="config.DevelopmentConfig"):
     app = Flask(__name__)
+    CORS(app, supports_credentials=True)
     app.config.from_object(config_class)
     api = Api(app, version='1.0', title='HBnB API', description='HBnB Application API')
     bcrypt.init_app(app=app)
